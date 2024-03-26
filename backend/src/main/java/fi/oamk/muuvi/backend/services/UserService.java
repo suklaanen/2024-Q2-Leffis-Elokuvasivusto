@@ -1,17 +1,39 @@
 package fi.oamk.muuvi.backend.services;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import fi.oamk.muuvi.backend.models.User;
+import fi.oamk.muuvi.backend.models.UserRole;
 import fi.oamk.muuvi.backend.repositories.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 
-public class UserService {
+@Service
+public class UserService implements UserDetailsService{
 
-    UserRepository repo;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    UserService(UserRepository repo) {
-        this.repo = repo;
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+    
+    @Override
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
     }
 
+    public User register(String username, String password) {
+        return userRepository.save(new User(username, passwordEncoder.encode(password), UserRole.ROLE_USER.name()));
+    }
+
+    
+    /*   
+      
     User getUserById(Long id) {
         if (id == null) return null;
         try {
@@ -21,4 +43,7 @@ public class UserService {
         }
     }
 
+    */
+
 }
+

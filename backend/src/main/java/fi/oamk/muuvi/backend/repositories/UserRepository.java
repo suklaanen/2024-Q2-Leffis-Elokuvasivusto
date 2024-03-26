@@ -1,8 +1,15 @@
 package fi.oamk.muuvi.backend.repositories;
 
-import fi.oamk.muuvi.backend.models.User;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import fi.oamk.muuvi.backend.models.User;
+
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByUsername(String username);
+    
+
 
 }

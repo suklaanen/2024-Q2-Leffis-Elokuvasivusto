@@ -1,43 +1,71 @@
 package fi.oamk.muuvi.backend.models;
 
-import jakarta.persistence.*;
-import java.util.List;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Collections;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long userId;
-    private String userName;
+
+    private String username;
     private String passwordHash;
+    private String userRole;
 
-    // No setter or getter yet
-    @OneToMany(mappedBy = "user_id")
-    Set<UsersToGroups> groupRegistrations;
-
-    @OneToMany(mappedBy = "owner")
-    private List<Favourite> favourites;
-
-    @OneToMany(mappedBy = "owner")
-    private List<Review> reviews;
-
-    public String userName() {
-        return userName;
+    public User(String username, String passwordHash, String userRole) {
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.userRole = userRole;
     }
 
-    public void userName(String userName) {
-        this.userName = userName;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(UserRole.valueOf(userRole));
     }
 
-    public String passwordHash() {
+    @Override
+    public String getPassword() {
         return passwordHash;
     }
 
-    public void passwordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        // ei tueta tällaista ominaisuutta
+        return false;
+    }
 
+    @Override
+    public boolean isAccountNonLocked() {
+        // tämä toteutetaan myöhemmin
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // ei tueta tällaista ominaisuutta
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    
 }
