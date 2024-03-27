@@ -1,59 +1,59 @@
-import React from 'react';
-import axios from 'axios'; 
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Movies = () => {
   const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    search();
+  }, []); 
 
   const search = async () => {
     try {
-        const response = await axios.get('YOUR_BACKEND_URL_HERE', {
-            params: {
-                query: query
-                // Lisää tarvittaessa muita parametreja, kuten hakuehtoja
-            }
-        });
-        console.log(response.data); // Tulosta vastaus konsoliin tarkistusta varten
-        // Tässä voit päivittää tilaa Reactissa vastauksen perusteella
+      const response = await axios.get('http://localhost:8080/movie/search', {
+        params: {
+          query: query
+        }
+      });
+      console.log(response.data); 
+      setMovies(response.data); 
     } catch (error) {
-        console.error('Virhe hakua tehdessä:', error);
+      console.error('Hakuvirhe:', error);
     }
   };
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
-};
+  };
 
-    const search = () => {
-        // logiikka
-        alert('click');
-      }    
+    return (
+      <>
+      <h2>Leffishaku</h2>
 
-  return (
+      <label>
+      Hae elokuvaa tai sarjaa:
+      <input
+        className="field"
+        type="text"
+        placeholder="..."
+        value={query}
+        onChange={handleInputChange}/>
+      </label>
 
-    <>
+      <button onClick={search}>Hae</button>
 
-    <h2>Leffishaku</h2>
-
-    <label>
-        Hae elokuvaa tai sarjaa:
-        <input
-            className="field"
-            type="text"
-            placeholder="..."
-            value={query}
-            onChange={handleInputChange}
-        />
-    </label>
-
-
-    Hae elokuvaa tai sarjaa: <input className="field" type="text" placeholder="..." /> <br/>
-    + hakuehdot yms. <br/>
-    
-    <button onClick={search}>Hae</button> 
-
-    </>
-
-
+      <div className="movie-container">
+        {movies.map(movie => (
+        <div key={movie.id} className="movie-item">
+          <Link to={`/movie/${movie.id}`}>
+          <img src={movie.poster} alt={movie.title} />
+          </Link>
+        </div>
+        ))}
+      </div>
+      </>
   );
 };
 

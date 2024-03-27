@@ -10,6 +10,7 @@ import MyAccount from '@pages/MyAccount';
 import ScreenError from '@content/ScreenError';
 import Navi from '@components/header/Navi';
 import Footer from '@components/footer/Footer';
+import MovieDetails from '@content/MovieDetails';
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
@@ -44,6 +45,7 @@ const App = () => {
             <Route path="/community" element={<Community />} />
             <Route path="/login" element={<Login setUser={setUser}/>} />
             <Route path="/myaccount" element={<MyAccount user={user} />} />
+            <Route path="/movie/:id" element={<MovieDetails/>} />
           </Routes>
 
           <Footer toggleTheme={toggleTheme} theme={theme} />

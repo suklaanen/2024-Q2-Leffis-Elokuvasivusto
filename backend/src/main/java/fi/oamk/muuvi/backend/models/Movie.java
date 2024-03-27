@@ -1,7 +1,6 @@
 package fi.oamk.muuvi.backend.models;
 
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 @Table(name = "movies")

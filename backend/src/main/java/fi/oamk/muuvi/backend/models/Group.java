@@ -2,10 +2,6 @@ package fi.oamk.muuvi.backend.models;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-import java.util.Set;
-
-
 @Entity
 @Table(name = "groups_")
 public class Group {
@@ -16,7 +12,7 @@ public class Group {
     private String groupName;
     private String groupDescription;
 
-    public Set<UsersToGroups> getParticipantRegistrations() {
+    /*public Set<UsersToGroups> getParticipantRegistrations() {
         return participantRegistrations;
     }
 
@@ -39,16 +35,16 @@ public class Group {
     public void setEvents(Set<Event> events) {
         this.events = events;
     }
-
+*/
     // No setter or getter yet
-    @OneToMany(mappedBy = "user_id")
-    private Set<UsersToGroups> participantRegistrations;
+    //@OneToMany(mappedBy = "userId")
+    //private Set<UsersToGroups> participantRegistrations;
 
-    @OneToMany(mappedBy = "group_id")
-    private Set<Movie> movies;
+    //@OneToMany(mappedBy = "groupId")
+    //private Set<Movie> movies;
 
-    @OneToMany(mappedBy = "group_id")
-    private Set<Event> events;
+    //@OneToMany(mappedBy = "groupId")
+    //private Set<Event> events;
 
 
     public Long getGroupId() {

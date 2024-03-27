@@ -1,24 +1,26 @@
 services:
-  backend:
-    env_file:
-      - path: ./.env
-    build:
-      dockerfile: Dockerfile
-      tags:
-        - blogi.felixi.org:5000/muuvit-backend
-    ports:
-      - "3000:3000"
-    environment:
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_HOST=${DB_HOST}
+  #backend:
+  #  env_file:
+  #    - path: ./.env
+  #  build:
+  #    dockerfile: Dockerfile
+  #    tags:
+  #      - blogi.felixi.org:5000/muuvit-backend
+  #  ports:
+  #    - "3000:3000"
+  #  environment:
+  #    - DB_PASSWORD=${DB_PASSWORD}
 
-
+  # Tämä on DB_HOST (pgdatabase) kun käytetään dockeria. 
+  # Muuten se on render.comin hosti tietokannalle.
   pgdatabase:
     image: postgres:16.2-alpine
     environment:
+      - POSTGRES_DB=leffis
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=muuvit
+      - POSTGRES_USER=leffisuser
     ports:
       - '5432:5432'
     volumes:
-      - '/var/lib/postgresql/data'
+      #- '/var/lib/postgresql/data'
+      - './sql:/docker-entrypoint-initdb.d'

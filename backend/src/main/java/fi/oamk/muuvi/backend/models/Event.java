@@ -3,14 +3,14 @@ package fi.oamk.muuvi.backend.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "events_")
+@Table(name = "Events_")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
+    @JoinColumn(name = "groupId")
     private Group group;
 
     private Long eventIdOnFinnkino;
