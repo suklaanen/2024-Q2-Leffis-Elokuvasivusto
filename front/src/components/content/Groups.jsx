@@ -23,7 +23,7 @@ const Groups = () => {
     <div>
       <h2>Ryhmät</h2>
       <p className="info">
-        Kirjautuneena käyttäjänä pääset sukeltamaan syvemmälle Muuvin tarjoaman yhteisöllisyyden maailmaan. Liity olemassa oleviin ryhmiin tai luo oma, jossa voit jakaa suosikkikohtauksiasi, keskustella juonikäänteistä tai löytää samanhenkistä leffaporukkaa. Etsi ryhmiä nimillä tai tutustu kuhunkin yksityiskohtaisesti niiden omilla sivuilla.
+        Kirjautuneena käyttäjänä pääset sukeltamaan syvemmälle  Leffiksen tarjoaman yhteisöllisyyden maailmaan. Liity olemassa oleviin ryhmiin tai luo oma, jossa voit jakaa suosikkikohtauksiasi, keskustella juonikäänteistä tai löytää samanhenkistä leffaporukkaa. Etsi ryhmiä nimillä tai tutustu kuhunkin yksityiskohtaisesti niiden omilla sivuilla.
       </p>
 
           <b>Etsi ryhmää</b> <br/>

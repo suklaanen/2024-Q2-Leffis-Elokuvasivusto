@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, useTheme } from './ThemeProvider';
-import './App.css';
 import Home from '@pages/Home';
 import Search from '@pages/Search';
 import Community from '@pages/Community';
