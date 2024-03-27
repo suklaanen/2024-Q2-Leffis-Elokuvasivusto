@@ -6,11 +6,11 @@ const Navi = ({ user, handleLogout }) => {
     <div id="container">
       <div id="colorbar">
         <div className="header-container">
-          <h1>Muuvi</h1>
+          <h1>Leffis</h1>
           <div>
             <ul className="navi">
               <li><Link to="/">Etusivu</Link></li>
-              <li><Link to="/search">Muuvihaku</Link></li>
+              <li><Link to="/search">Leffishaku</Link></li>
               <li><Link to="/community">Yhteisö</Link></li>
               {!user && <li><Link to="/login">Kirjautuminen</Link></li>}
               {user && <li><Link to="/myaccount">Oma tili</Link></li>}

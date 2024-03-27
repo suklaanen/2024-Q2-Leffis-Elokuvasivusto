@@ -51,22 +51,22 @@ const Home = () => {
     <div className="movieBg" style={bgStyle}></div> <br/>
 
 
-      <h2>Tervetuloa Muuvi -palveluun! </h2>
+      <h2>Tervetuloa Leffis -palveluun! </h2>
 
       <p>
       Kaipaatko paikkaa, jossa intohimo elokuviin ja sarjoihin yhdistää meidät kaikki? </p>
 
       <p>
-      Muuvi on portti jännittävään yhteisöön, missä voit liittyä ryhmiin, jakaa ajatuksiasi leffoista ja sarjoista ryhmächateissa, sekä lukea ja kirjoittaa arvosteluja. Lisäksi tarjoamme ainutlaatuisen Finnkino -elokuvanäytöshakumme sekä kattavan leffahakumme, joiden avulla löydät helposti juuri sinua kiinnostavat elokuvat ja sarjat.
+      Leffis on portti jännittävään yhteisöön, missä voit liittyä ryhmiin, jakaa ajatuksiasi leffoista ja sarjoista ryhmächateissa, sekä lukea ja kirjoittaa arvosteluja. Lisäksi tarjoamme ainutlaatuisen Finnkino -elokuvanäytöshakumme sekä kattavan leffahakumme, joiden avulla löydät helposti juuri sinua kiinnostavat elokuvat ja sarjat.
       </p>
 
 
       <p>
-      Täällä yhteisöllisyys kohtaa elokuvien ja sarjojen maailman – tervetuloa kotiin elokuvafanien paratiisiin. Tervetuloa Muuviin.
+      Täällä yhteisöllisyys kohtaa elokuvien ja sarjojen maailman – tervetuloa kotiin elokuvafanien paratiisiin. Tervetuloa Leffikseen.
       </p>
 
       <p className="info">
-        Muuvi on OAMK tietotekniikan opiskelijoiden tekemä elokuvasovellusprojekti. Tarkoituksena on luoda leffaharrastajille sivusto. <br/>
+        Leffis on OAMK tietotekniikan opiskelijan tekemä elokuvasovellusprojekti. Tarkoituksena on luoda leffaharrastajille sivusto. <br/>
         Sovellus hyödyntää avoimen datan lähteitä ja sille tehdään oma palvelin ja tietokanta datan hallintaan. <br/>
       </p>
 
