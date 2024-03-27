@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -23,10 +24,12 @@ public class SecurityConfig {
             // allow any user to access openapi documentation
             .requestMatchers("/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html").permitAll()
             .requestMatchers("/user/**").permitAll()
+            .requestMatchers("/movie/**").permitAll()
             // any other endpoint requires authenticated user
             .anyRequest().authenticated()
         ).authenticationProvider(authenticationProvider);
         return http.build();
+
     }
 
     @Bean

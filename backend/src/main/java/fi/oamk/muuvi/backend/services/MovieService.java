@@ -13,6 +13,7 @@ import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fi.oamk.muuvi.backend.Shemas.Movie;
 import fi.oamk.muuvi.backend.Shemas.MovieResult;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -58,7 +59,7 @@ public class MovieService {
         return genres.get(genre);
     }
     
-    public ResponseEntity<MovieResult> search(String queryString, String genre, Integer page, Integer year, String language) {     
+    public MovieResult search(String queryString, String genre, Integer page, Integer year, String language) {     
         String nameSearchString = queryString != null ? String.format("&query=%s", queryString) : "";
         String genreSearch = genre != null ? String.format("&with_genres=%s", getGenreId(genre)) : "";
         String pageSearch = page != null ? String.format("&page=%s", page) : "";
@@ -73,35 +74,53 @@ public class MovieService {
            URL = String.format("https://api.themoviedb.org/3/search/movie?api_key=%s%s%s%s%s%s", this.getApiKey(), nameSearchString, genreSearch, pageSearch, yearSearch, languageSearch);
         }
     
-        return executeAndDeserialise(URL);
+        return executeAndDeserialise(URL, MovieResult.class);
     }
     
-    public ResponseEntity<MovieResult> fetchDetails(List<Integer> id) {
-        String URL = String.format("https://api.themoviedb.org/3/search/movie?api_key=%s&query=%s", this.getApiKey(), id.toString().replace("[", "").replace("]", ""));
-
-        return executeAndDeserialise(URL);
+    public Movie fetchDetail(Integer id) {
+        String URL = String.format("https://api.themoviedb.org/3/movie/%d?api_key=%s&language=fi,en", id, this.getApiKey());
+        return executeAndDeserialise(URL, Movie.class);
     }
 
-    public ResponseEntity<MovieResult> executeAndDeserialise(String URL) {
+    public MovieResult fetchDetails(List<Integer> id) {
+    
+        String URL = String.format("https://api.themoviedb.org/3/search/movie?api_key=%s&query=%s", this.getApiKey(), id.toString().replace("[", "").replace("]", ""));
+
+        System.out.println(URL);
+        return executeAndDeserialise(URL, MovieResult.class);
+    }
+
+    public <T> T executeAndDeserialise(String URL, Class<T> clazz) {
         Request request = new Request.Builder()
         .url(URL)
         .get()
         .addHeader("accept", "application/json")
         .build();
+        String responseBody = null;
 
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                return ResponseEntity.status(response.code()).body(null);
+                throw new IllegalStateException("Elokuvapalvelu palautti virheen: " + response.code() + " " + response.message());
             }
 
-            String responseBody = response.body().string();
-
-            ObjectMapper mapper = new ObjectMapper();
-            MovieResult movieResult = mapper.readValue(responseBody, MovieResult.class);
-
-            return ResponseEntity.ok(movieResult);
+            responseBody = response.body().string();
+            
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            throw new IllegalStateException("Ei saatu yhteyttä elokuvapalveluun", e);
         }
+
+        System.out.println(responseBody);
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+
+            T movieResult = mapper.readValue(responseBody, clazz);
+
+            return movieResult;
+            
+        } catch (Exception e) {
+            throw new IllegalStateException("Ei saatu käsiteltyy dataa elokuvapalvelusta: " + responseBody, e);
+        }
+
     }
 }

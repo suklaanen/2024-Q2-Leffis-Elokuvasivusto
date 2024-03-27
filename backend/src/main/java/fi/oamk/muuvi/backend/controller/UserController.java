@@ -27,10 +27,10 @@ public class UserController {
     }
 
 
-    @PostMapping("/user/register") 
+    /*@PostMapping("/user/register") 
     public ResponseEntity<User> registerUser(@RequestBody UserData userData) {
 
-    }
+    }*/
 
     //@DeleteMapping("/{id}") 
     

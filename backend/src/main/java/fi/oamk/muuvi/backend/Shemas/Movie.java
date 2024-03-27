@@ -1,5 +1,6 @@
 package fi.oamk.muuvi.backend.Shemas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Movie {
     private boolean adult;
     private String backdrop_path;
-    private List<Integer> genre_ids;
+    private List<Integer> genre_ids = new ArrayList<>();
     private int id;
     private String original_language;
     private String original_title;
