@@ -234,6 +234,21 @@ label {
   padding: 0.2em 1em;
 }
 
+.shortInput {
+  margin: 0 auto;
+  width: 80px;
+}
+
+.longInput {
+  margin: 0 auto;
+  margin-left: 0;
+  width: 180px;
+}
+
+select {
+  padding: 1em 1em;
+}
+
 button {
   margin-top: 20px;
   margin-right: 8px;
