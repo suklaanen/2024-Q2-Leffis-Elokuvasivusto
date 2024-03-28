@@ -12,12 +12,10 @@ const Reviews = () => {
   }
 
   const searchReviews = () => {
-    // Logiikka arvostelujen hakemiselle
     alert('Haku suoritettu!');
   }
 
   const createReview = () => {
-    // Logiikka uuden arvostelun luomiselle
     alert('Arvostelu luotu!');
   }
 

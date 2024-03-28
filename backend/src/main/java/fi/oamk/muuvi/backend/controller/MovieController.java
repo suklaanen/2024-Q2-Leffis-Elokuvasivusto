@@ -47,6 +47,30 @@ public class MovieController {
         return ResponseEntity.ok(movies);
     }
 
+    @GetMapping("/discover")
+    public ResponseEntity<List<MovieData>> discoverMovies(
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String genre,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer year,
+            @RequestParam(required = false) String language) {
+        MovieResult result = movieService.discover(keyword, genre, page, year, language);
+        List<MovieData> movies = result.getResults().stream().map(apiMovie -> new MovieData(
+            apiMovie.getId(),
+            apiMovie.getTitle(), 
+            apiMovie.getOverview(), 
+            apiMovie.getGenre_ids().toString(), 
+            apiMovie.getOriginal_language(), 
+            null, 
+            null, 
+            apiMovie.getPoster_path(), 
+            apiMovie.getRelease_date(), 
+            apiMovie.getBackdrop_path(),
+            null)).toList();
+        return ResponseEntity.ok(movies);
+    }
+
     @GetMapping("/fetchDetails")
     public ResponseEntity<List<MovieData>> getMoviesByIDs(@RequestParam List<Integer> id) {
         MovieResult result = movieService.fetchDetails(id);

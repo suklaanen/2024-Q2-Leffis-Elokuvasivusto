@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Groups = () => {
+  
   const [showCreateForm, setShowCreateForm] = useState(false);
 
   const closeCreateForm = () => {
@@ -46,8 +48,9 @@ const Groups = () => {
 
       <h3>Ryhmät listana [a - z]</h3> 
 
-      <i>esimerkkejä vaan</i>
-      <p className="inner-1em"><a href="#">Ryhmärämä</a></p>
+      <i>esimerkkejä vaan</i> <br/>
+      <p className="inner-1em"><Link to={"/group/"}>Ryhmärämä</Link></p>
+      <p className="inner-1em"><Link to={"/group/"}>AA</Link></p>
       <p className="inner-1em"><a href="#">komediahullut</a></p>
       <p className="inner-1em"><a href="#">tosimiesklubi</a></p>
       <p className="inner-1em"><a href="#">Stadin Muuvissa</a></p>

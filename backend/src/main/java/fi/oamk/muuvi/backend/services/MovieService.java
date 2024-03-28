@@ -5,15 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
-import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fi.oamk.muuvi.backend.Shemas.Movie;
+import fi.oamk.muuvi.backend.controller.data.MovieData;
 import fi.oamk.muuvi.backend.Shemas.MovieResult;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -66,14 +63,26 @@ public class MovieService {
         String yearSearch = year != null ? String.format("&primary_release_year=%s", year) : "";
         String languageSearch = language != null ? String.format("&language=%s", language) : "";
         
-        String URL;
+        /*String URL;
     
         if (queryString == null) {
            URL = String.format("https://api.themoviedb.org/3/discover/movie?api_key=%s%s%s%s%s", this.getApiKey(), genreSearch, pageSearch, yearSearch, languageSearch);
-        } else {
-           URL = String.format("https://api.themoviedb.org/3/search/movie?api_key=%s%s%s%s%s%s", this.getApiKey(), nameSearchString, genreSearch, pageSearch, yearSearch, languageSearch);
-        }
+        } else {*/
+           String URL = String.format("https://api.themoviedb.org/3/search/movie?api_key=%s%s%s%s%s%s", this.getApiKey(), nameSearchString, genreSearch, pageSearch, yearSearch, languageSearch);
+        //}
     
+        return executeAndDeserialise(URL, MovieResult.class);
+    }
+
+    public MovieResult discover(String queryString, String genre, Integer page, Integer year, String language) {
+        //String keyword = queryString != null ? String.format("&with_keywords=%s", queryString) : "";
+        String genreSearch = genre != null ? String.format("&with_genres=%s", getGenreId(genre)) : "";
+        String pageSearch = page != null ? String.format("&page=%s", page) : "";
+        String yearSearch = year != null ? String.format("&primary_release_year=%s", year) : "";
+        String languageSearch = language != null ? String.format("&language=%s", language) : "";
+            
+        String URL = String.format("https://api.themoviedb.org/3/discover/movie?api_key=%s%s%s%s%s", this.getApiKey(), genreSearch, pageSearch, yearSearch, languageSearch);
+        
         return executeAndDeserialise(URL, MovieResult.class);
     }
     
