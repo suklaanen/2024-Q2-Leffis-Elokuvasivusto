@@ -1,4 +1,14 @@
 
+.flex-container > div {
+  margin-bottom: 10px; 
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .group-view {
     background-color: var(--grp-background);
     color: var(--grp-text);
@@ -15,6 +25,16 @@
 .group-right {
     flex-basis: 20%;
     padding: 10px;
+}
+
+.pdd-right {
+  padding-right: 25px;
+}
+
+.group-view-item-left,
+.group-view-item-right {
+  flex-basis: calc(90%/ 2);
+  padding: 10px;
 }
 
 .wall-view {
@@ -50,3 +70,14 @@
     --grp-text: #000000;
   }
   
+
+  @media screen and (max-width: 500px) {
+    .group-view {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .group-view-item-left {
+      order: 2; /* Asettaa vasemman lohkon alapuolelle */
+    }
+  }

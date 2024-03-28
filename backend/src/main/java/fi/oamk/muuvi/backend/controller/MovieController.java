@@ -51,11 +51,13 @@ public class MovieController {
     public ResponseEntity<List<MovieData>> discoverMovies(
             @RequestParam(required = false) String query,
             @RequestParam(required = false) String keyword,
+            @RequestParam(required = false, defaultValue = "popularity.desc") String sort_by,
             @RequestParam(required = false) String genre,
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer year,
-            @RequestParam(required = false) String language) {
-        MovieResult result = movieService.discover(keyword, genre, page, year, language);
+            @RequestParam(required = false) String language,
+            @RequestParam(required = false) String with_keywords) {
+        MovieResult result = movieService.discover(query, genre, sort_by, page, year, language, with_keywords);
         List<MovieData> movies = result.getResults().stream().map(apiMovie -> new MovieData(
             apiMovie.getId(),
             apiMovie.getTitle(), 

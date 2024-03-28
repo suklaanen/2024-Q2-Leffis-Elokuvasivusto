@@ -24,7 +24,7 @@ const MovieDetails = () => {
   }, [id]);
 
   return (
-    <div class="page">
+    <div className="page">
 
         <div className="movie-details">
       {movie && (
