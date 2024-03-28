@@ -5,14 +5,15 @@ services:
   #  build:
   #    dockerfile: Dockerfile
   #    tags:
-  #      - blogi.felixi.org:5000/muuvit-backend
+  #      - 
   #  ports:
-  #    - "3000:3000"
+  #    - 
   #  environment:
   #    - DB_PASSWORD=${DB_PASSWORD}
 
   # Tämä on DB_HOST (pgdatabase) kun käytetään dockeria. 
   # Muuten se on render.comin hosti tietokannalle.
+
   pgdatabase:
     image: postgres:16.2-alpine
     environment:
