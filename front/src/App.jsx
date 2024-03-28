@@ -11,6 +11,8 @@ import ScreenError from '@content/ScreenError';
 import Navi from '@components/header/Navi';
 import Footer from '@components/footer/Footer';
 import MovieDetails from '@content/MovieDetails';
+import GroupDetails from '@content/GroupDetails';
+import ProfileDetails from '@content/ProfileDetails';
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
@@ -46,6 +48,8 @@ const App = () => {
             <Route path="/login" element={<Login setUser={setUser}/>} />
             <Route path="/myaccount" element={<MyAccount user={user} />} />
             <Route path="/movie/:id" element={<MovieDetails/>} />
+            <Route path="/group/" element={<GroupDetails/>} />
+            <Route path="/profile/" element={<ProfileDetails/>} />
           </Routes>
 
           <Footer toggleTheme={toggleTheme} theme={theme} />
