@@ -13,24 +13,21 @@ Projekti jakautui projektiviikon 3. alussa. Siihen mennessä toteutusta oli teht
 
 ### Paikalliseen testailuun? :)
 
-### 1. Lisää env-tiedosto backendin juureen tiedoilla:
+**Lisää env-tiedosto backendin juureen tiedoilla:**
 
-TMDB_API_KEY=apiavaimesi
+- TMDB_API_KEY=apiavaimesi
+- DB_USER=leffisuser
+- DB_PASSWORD=salasanasi
+- DB_HOST=localhost
 
-DB_USER=leffisuser
+**Avaa docker desktop ja aja backendin-juuresta:**
 
-DB_PASSWORD=salasanasi
+- docker compose up -d
 
-DB_HOST=localhost
+**Aja springbootti käyntiin backendin-juuresta:**
 
-### 2. Avaa docker desktop ja aja backendin-juuresta:
+- mvn spring-boot:run 
 
-docker compose up -d
+**Kokeile selaimella, kun olet ajanut frontendin-juuresta:**
 
-### 3. Aja springbootti käyntiin backendin-juuresta:
-
-mvn spring-boot:run 
-
-### 4. Kokeile selaimella, kun olet ajanut frontendin-juuresta:
-
-npm run dev
+- npm run dev
