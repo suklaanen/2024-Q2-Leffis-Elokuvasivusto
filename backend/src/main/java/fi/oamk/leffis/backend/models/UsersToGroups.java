@@ -10,11 +10,11 @@ public class UsersToGroups {
     private Long usersToGroupsId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userid")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "group_id")
+    @JoinColumn(name = "groupId")
     private Group group;
 
     public static enum Status { accepted, pending };

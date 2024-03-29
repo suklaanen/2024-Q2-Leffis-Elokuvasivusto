@@ -18,26 +18,29 @@ import jakarta.persistence.Table;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long userId;
+    private Long userid;
 
     private String username;
-    private String passwordHash;
-    private String userRole;
+    private String hashedpassword;
+    private String userrole;
 
-    public User(String username, String passwordHash, String userRole) {
+    public User() {
+    }
+    
+    public User(String username, String hashedpassword, String userrole) {
         this.username = username;
-        this.passwordHash = passwordHash;
-        this.userRole = userRole;
+        this.hashedpassword = hashedpassword;
+        this.userrole = userrole;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(UserRole.valueOf(userRole));
+        return Collections.singletonList(UserRole.valueOf(userrole));
     }
 
     @Override
     public String getPassword() {
-        return passwordHash;
+        return hashedpassword;
     }
 
     @Override

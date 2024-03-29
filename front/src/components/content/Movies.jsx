@@ -76,9 +76,9 @@ const Movies = () => {
       Annetaan enintään 20 hakutulosta per. sivu.</p>
 
 
-      <div class="group-view">
+      <div className="group-view">
 
-        <div class="group-view-item-left">
+        <div className="group-view-item-left">
           <b>Hae nimellä:</b>
           <div>
             <input
@@ -93,7 +93,7 @@ const Movies = () => {
               <button onClick={handleSearch}>Hae</button>
           </div>
         </div>
-        <div class="group-view-item-right">
+        <div className="group-view-item-right">
           <div>
 
             <div className="flex">
