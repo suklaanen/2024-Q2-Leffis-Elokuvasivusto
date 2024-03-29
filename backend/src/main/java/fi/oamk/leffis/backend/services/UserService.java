@@ -31,19 +31,15 @@ public class UserService implements UserDetailsService{
         return userRepository.save(new User(username, passwordEncoder.encode(password), UserRole.ROLE_USER.name()));
     }
 
-    
-    /*   
-      
-    User getUserById(Long id) {
-        if (id == null) return null;
-        try {
-            return this.repo.getReferenceById(id);
-        } catch (EntityNotFoundException e) {
-            return null;
-        }
+    public User loadUserById(Long userId) throws UsernameNotFoundException {
+        return userRepository.findById(1L)
+                .orElseThrow(() -> new UsernameNotFoundException(userId + " not found"));
     }
 
-    */
+    public void delete(Long userId) {
+        userRepository.deleteById(userId);
+    }
+
 
 }
 
