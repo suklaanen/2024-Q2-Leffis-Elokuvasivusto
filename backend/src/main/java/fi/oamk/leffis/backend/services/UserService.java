@@ -28,16 +28,19 @@ public class UserService implements UserDetailsService{
     }
 
     public User register(String username, String password) {
+        if (username == null || username.isBlank() || password == null || password.isBlank()) {
+            throw new IllegalArgumentException("Username or password is empty");
+        }
         return userRepository.save(new User(username, passwordEncoder.encode(password), UserRole.ROLE_USER.name()));
     }
 
-    public User loadUserById(Long userId) throws UsernameNotFoundException {
+    public User loadUserById(Long userid) throws UsernameNotFoundException {
         return userRepository.findById(1L)
-                .orElseThrow(() -> new UsernameNotFoundException(userId + " not found"));
+                .orElseThrow(() -> new UsernameNotFoundException(userid + " not found"));
     }
 
-    public void delete(Long userId) {
-        userRepository.deleteById(userId);
+    public void delete(Long userid) {
+        userRepository.deleteById(userid);
     }
 
 

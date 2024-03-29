@@ -10,7 +10,7 @@ public class Review {
     private Long reviewId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userid")
     private User owner;
     private Long shareSlur;
 

@@ -6,22 +6,254 @@ servers:
 - url: http://localhost
   description: Generated server url
 paths:
-  /user/{id}:
-    get:
+  /user/register:
+    post:
       tags:
       - user-controller
-      operationId: getUser
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserData'
+        required: true
       responses:
         "200":
           description: OK
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/UserDetails'
+                $ref: '#/components/schemas/User'
+  /users/{username}:
+    get:
+      tags:
+      - user-controller
+      operationId: getUser
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+  /movie/search:
+    get:
+      tags:
+      - movie-controller
+      operationId: searchMovies
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: genre
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: year
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: language
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovieData'
+  /movie/find/{id}:
+    get:
+      tags:
+      - movie-controller
+      operationId: getMoviesByID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MovieData'
+  /movie/fetchDetails:
+    get:
+      tags:
+      - movie-controller
+      operationId: getMoviesByIDs
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovieData'
+  /movie/discover:
+    get:
+      tags:
+      - movie-controller
+      operationId: discoverMovies
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort_by
+        in: query
+        required: false
+        schema:
+          type: string
+          default: popularity.desc
+      - name: genre
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: year
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: language
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: with_keywords
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovieData'
+  /event/theatreAreas:
+    get:
+      tags:
+      - event-controller
+      operationId: getTheatreAreas
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/JsonNode'
 components:
   schemas:
-    UserDetails:
+    UserData:
       type: object
       properties:
         username:
           type: string
+        password:
+          type: string
+    GrantedAuthority:
+      type: object
+      properties:
+        authority:
+          type: string
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        enabled:
+          type: boolean
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantedAuthority'
+        credentialsNonExpired:
+          type: boolean
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        password:
+          type: string
+    MovieData:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
+          type: string
+        description:
+          type: string
+        genre:
+          type: string
+        language:
+          type: string
+        director:
+          type: string
+        actors:
+          type: string
+        poster:
+          type: string
+        year:
+          type: string
+        imdbRating:
+          type: string
+        backdrop:
+          type: string
+    JsonNode:
+      type: object

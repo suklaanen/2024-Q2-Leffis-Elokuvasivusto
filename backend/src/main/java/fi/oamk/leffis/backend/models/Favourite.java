@@ -10,7 +10,7 @@ public class Favourite {
     private Long movieId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userid")
     private User owner;
 
     public Long getFavouriteId() {

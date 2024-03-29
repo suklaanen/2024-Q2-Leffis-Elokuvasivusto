@@ -20,13 +20,17 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) throws Exception {
         http
         // for every http request
+            .csrf().disable()
+            .cors().disable()
             .authorizeHttpRequests((authz) -> authz
             // allow any user to access openapi documentation
             .requestMatchers("/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html").permitAll()
             .requestMatchers("/user/**").permitAll()
+            .requestMatchers("/users/**").permitAll()
             .requestMatchers("/movie/**").permitAll()
             // any other endpoint requires authenticated user
             .anyRequest().authenticated()
+            //.anyRequest().permitAll()
         ).authenticationProvider(authenticationProvider);
         return http.build();
 
