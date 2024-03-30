@@ -13,11 +13,12 @@ import fi.oamk.leffis.backend.controller.data.MovieData;
 import fi.oamk.leffis.backend.services.MovieService;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173") 
+@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", allowCredentials = "true") 
 @RequestMapping("/movie")
 public class MovieController {
     private final MovieService movieService;
@@ -45,6 +46,7 @@ public class MovieController {
             apiMovie.getRelease_date(), 
             apiMovie.getBackdrop_path(),
             null)).toList();
+            System.out.println(SecurityContextHolder.getContext().getAuthentication());
         return ResponseEntity.ok(movies);
     }
 

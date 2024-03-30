@@ -50,20 +50,17 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        // ei tueta tällaista ominaisuutta
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // tämä toteutetaan myöhemmin
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // ei tueta tällaista ominaisuutta
-        return false;
+        return true;
     }
 
     @Override
