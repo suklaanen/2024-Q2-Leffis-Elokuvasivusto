@@ -18,7 +18,7 @@ const Register = () => {
     console.log('Rekisteröidään käyttäjä', username);
     console.log('Salasanalla', password);
 
-    axios.post('http://localhost:8080/user/register', {
+    axios.post('http://localhost:8080/auth/register', {
       username: username,
       password: password
     })
